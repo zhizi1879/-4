@@ -134,7 +134,7 @@ def show_page_1():
                 st.session_state.answers[i] = st.radio("", options, key=f"q{i}", index=0, label_visibility="collapsed")
         if st.button("提交测评", type="primary", key="btn_submit"):
             st.session_state.submitted = True
-            st.experimental_rerun()
+            st.rerun()
     else:
         phq9, gad7, total = calc_score(st.session_state.answers)
         phq9_level, phq9_tip = get_level(phq9, gad7)
@@ -173,7 +173,7 @@ def show_page_1():
         if st.button("🔄 重新测评", key="btn_retest"):
             st.session_state.answers = ["完全不会"] * 16
             st.session_state.submitted = False
-            st.experimental_rerun()
+            st.rerun()
 
 
 # ========== 放松练习（音频页） ==========
@@ -314,7 +314,7 @@ def show_page_3():
                 "mood": mood_text,
                 "score": mood_scores[mood_options.index(mood_text)]
             })
-            st.experimental_rerun()
+            st.rerun()
 
     if st.session_state.mood_history:
         st.markdown("---")
@@ -353,7 +353,7 @@ def show_page_4():
                     "text": new_msg.strip(),
                     "time": datetime.now().strftime("%m-%d %H:%M")
                 })
-                st.experimental_rerun()
+                st.rerun()
 
     st.markdown("---")
     st.markdown("### 💬 树洞留言墙")
@@ -423,7 +423,7 @@ def show_page_6():
             st.session_state.badges.append("⭐ 10次练习")
         if st.session_state.total_sessions >= 30 and "💎 正念大师" not in st.session_state.badges:
             st.session_state.badges.append("💎 正念大师")
-        st.experimental_rerun()
+        st.rerun()
 
     st.markdown("---")
     st.markdown("**📌 本系统仅供减压参考，不构成医学建议。持续困扰请咨询心理健康中心。**")
@@ -447,4 +447,4 @@ else:
     st.markdown("---")
     if st.button("🏠 返回首页", key="btn_back_home_global", use_container_width=False):
         st.session_state.current_page = "首页"
-        st.experimental_rerun()
+        st.rerun()
